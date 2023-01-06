@@ -66,7 +66,19 @@ public class BasePage {
         element.sendKeys(value);
     }
 
-    // SELECT
+    // GET TEXT
+    public String getElementText(WebElement element){
+        return waitUtil.WaitForElementVisible(element).getText();
+    }
+    public String getElementText(By by){
+        return waitUtil.WaitForElementVisible(by).getText();
+    }
+    public String getElementText(String xpath){
+        return waitUtil.WaitForElementVisible(xpath).getText();
+    }
+    public String getElementText(String xpath, String value){
+        return waitUtil.WaitForElementVisible(xpath, value).getText();
+    }
 
 
 
