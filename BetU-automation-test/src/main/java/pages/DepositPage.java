@@ -1,6 +1,7 @@
 package pages;
 
 import core.BasePage;
+import core.BaseTest;
 import core.WaitUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,13 +11,13 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class DepositPage extends BasePage {
-    WaitUtil waitUtil = new WaitUtil();
-    @FindBy(xpath = "//label[text()='1. Select Coin']/following-sibling::div[contains(@style, 'position')]/div[2]/button")
-    private WebElement showListCoins;
+    private String showListCoins = "//label[text()='1. Select Coin']/following-sibling::div[contains(@style, 'position')]/div[2]/button";
     @FindBy(xpath = "//label[text()='2. Choose Network']/following-sibling::div")
     private WebElement showListNetWork;
-    @FindBy(xpath = "//li[contains(@id, 'mui')]/span[1]")
-    private WebElement listCoins;
+//    @FindBy(xpath = "//li[contains(@id, 'mui')]/span[1]")
+//    private WebElement listCoins;
+    private String listCoins = "//li[contains(@id, 'mui')]/span[1]";
+
     @FindBy(xpath = "//li[contains(@class, 'MuiMenuItem')]/span")
     private WebElement listNetWork;
 
@@ -34,17 +35,17 @@ public class DepositPage extends BasePage {
         return this;
     }
 
-    public DepositPage selectCoin() {
-        List<WebElement> ls = waitUtil.WaitForAllElementsVisible(listCoins);
+    public void selectCoin(String nameCoin) {
+        List<WebElement> ls = WaitUtil.WaitForAllElementsVisible(listCoins);
+//        List<WebElement> ls = BaseTest.getDriver().findElements(By.xpath(listCoins));
         for (WebElement element : ls) {
-            if (getElementText(element) == "BETU") {
+            if (getElementText(element).contains(nameCoin)) {
                 clickOnElement(element);
             }
         }
-        return this;
     }
     public DepositPage selectNetWork(){
-        List<WebElement> ls = waitUtil.WaitForAllElementsVisible(listNetWork);
+        List<WebElement> ls = WaitUtil.WaitForAllElementsVisible(listNetWork);
         for(WebElement element : ls){
             if(getElementText(element) == "BEP20"){
                 clickOnElement(element);
